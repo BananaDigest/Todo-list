@@ -1,0 +1,27 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "* User-friendly\r * Local Storage Supported\r * Displays current Date and Time\r * Responsive, on all devices\r * Themes: Users can choose among different themes.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BananaDigest/Todo-list.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BananaDigest/Todo-list/issues"
+  },
+  "homepage": "https://github.com/BananaDigest/Todo-list#readme"
+}

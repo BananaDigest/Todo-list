@@ -1,0 +1,14 @@
+# Залежності
+node_modules/
+dist/
+build/
+
+# Логи та звіти (те, що ми генеруємо в лабі)
+npm-debug.log*
+report.xml
+cloc-report.txt
+develop_changes.txt
+
+# SonarQube та інструменти
+.scannerwork/
+sonar-scanner-*/
