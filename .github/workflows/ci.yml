@@ -51,8 +51,8 @@ jobs:
 
       - name: Count lines of code with Cloc
         run: |
-          cloc JS/ --out=cloc-report.txt
-          Get-Content cloc-report.txt # Це аналог 'cat' для Windows, він надійніший
+          .\bin\cloc.exe JS/ --report-file=cloc-report.txt
+          Get-Content cloc-report.txt
 
       - name: Run SonarQube analysis
         env:
