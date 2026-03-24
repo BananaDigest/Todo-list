@@ -29,7 +29,7 @@ jobs:
     needs: build
     defaults:
       run:
-        shell: bash
+        shell: pwsh
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -51,9 +51,6 @@ jobs:
 
       - name: Count lines of code with Cloc
         run: |
-          # Примітка: на Windows sudo apt-get не спрацює. 
-          # Якщо cloc вже встановлено на ПК, просто запустіть його.
-          # Якщо ні, команда нижче спробує запустити його через bash.
           cloc JS/ > cloc-report.txt
           cat cloc-report.txt
 
