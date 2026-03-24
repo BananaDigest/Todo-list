@@ -25,8 +25,11 @@ jobs:
         run: npm test
 
   analysis:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: build
+    defaults:
+      run:
+        shell: powershell
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -41,10 +44,18 @@ jobs:
               repo: context.repo.repo,
               pull_number: prNumber
             });
-            
-            // Перевіряємо, чи є хоча б одне рев'ю зі статусом APPROVED
             const approved = reviews.some(review => review.state === 'APPROVED');
-            
             if (!approved) {
-              core.setFailed("Код-рев’ю не схвалено. Потрібно отримати 'Approve' від колеги.");
+              core.setFailed("Код-рев’ю не схвалено!");
             }
+
+      - name: Count lines of code with Cloc
+        run: |
+          .\bin\cloc.exe JS/ --report-file=cloc-report.txt
+          Get-Content cloc-report.txt
+
+      - name: Run SonarQube analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          sonar-scanner
