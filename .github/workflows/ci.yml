@@ -27,6 +27,9 @@ jobs:
   analysis:
     runs-on: self-hosted
     needs: build
+    permissions:
+      contents: read
+      pull-requests: write
     defaults:
       run:
         shell: powershell
@@ -59,3 +62,19 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           sonar-scanner
+
+      - name: Run ESLint with Reviewdog
+        uses: reviewdog/action-eslint@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          eslint_flags: "JS/"
+          level: error
+
+      - name: Run Prettier with Reviewdog
+        uses: EPMatt/reviewdog-action-prettier@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workdir: .
+          reporter: github-pr-review
+          level: info
