@@ -78,3 +78,12 @@ jobs:
           workdir: .
           reporter: github-pr-review
           level: info
+
+      - name: Перевірка змін у гілці develop
+        shell: powershell
+        run: |
+          git fetch origin develop
+          git checkout develop
+          git pull origin develop
+          git log --oneline --graph -n 10 > develop_changes.txt
+          Get-Content develop_changes.txt
